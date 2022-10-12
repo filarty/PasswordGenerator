@@ -1,13 +1,12 @@
-from typing import TypeVar
 
 import random
 
 import string
 
-Tself = TypeVar("Tself", bound="Password")
+import math_random as mr
 
 class Password:
-    def __init__(self) -> Tself:
+    def __init__(self) -> None:
         self.password = None
         
     def generate(self, count: int) -> str:
@@ -19,21 +18,23 @@ class Password:
         Returns:
             str: password in str
         """
-        string_list: list[str] = (self._add_lower_case() + self._add_number_case() + self._add_symbols_case() + self._add_upper_case())
+        lower, upper, symb, number = mr.get_random_distribution_numbers(count)
+        string_list: list[str] = (self._add_lower_case(lower) + self._add_number_case(upper) + self._add_symbols_case(symb) 
+                                + self._add_upper_case(number))
         random.shuffle(string_list)
         return "".join(string_list)
         
-    def _add_upper_case(self, count: int) -> str:
-        return random.sample(string.ascii_uppercase, random.randint(1, count))
+    def _add_upper_case(self, count: int) -> list[str]:
+        return random.sample(string.ascii_uppercase, count)
     
-    def _add_lower_case(self, count: int) -> str:
-        return random.sample(string.ascii_lowercase, random.randint(1, count))
+    def _add_lower_case(self, count: int) -> list[str]:
+        return random.sample(string.ascii_lowercase, count)
     
-    def _add_number_case(self, count: int) -> str:
-        return random.sample(string.digits, random.randint(1, count))
+    def _add_number_case(self, count: int) -> list[str]:
+        return random.sample(string.digits, count)
     
-    def _add_symbols_case(self, count: int) -> str:
-        return random.sample(string.punctuation, random.randint(1, count))
+    def _add_symbols_case(self, count: int) -> list[str]:
+        return random.sample(string.punctuation, count)
     
 if __name__ == "__main__":
     password = Password()

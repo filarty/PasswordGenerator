@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from source.PasswordGenerate import Password
 
-from source.math import get_random_distribution_numbers
+from source.math_random import get_random_distribution_numbers
 
 import string
 
