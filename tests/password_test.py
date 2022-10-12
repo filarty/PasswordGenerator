@@ -6,6 +6,7 @@ from source.math_random import get_random_distribution_numbers
 
 import string
 
+
 password = Password()
 
 class PasswordTest(TestCase):
@@ -24,7 +25,14 @@ class PasswordTest(TestCase):
     def test_symbols_case(self):
         password_string = "".join(password._add_symbols_case(4))
         self.assertTrue(all((string.punctuation.find(i) for i in password_string)))
-
+    
+    def test_summ_case(self):
+        self.assertEqual(6, len(password.generate(6)))
+        self.assertEqual(10, len(password.generate(10)))
+        self.assertEqual(15, len(password.generate(15)))
+        self.assertEqual(23, len(password.generate(23)))
+        self.assertEqual(55, len(password.generate(55)))
+        
 class MathFuncTest(TestCase):
     def test_symbol_summ(self):
         self.assertEqual(6, sum(get_random_distribution_numbers(6)))
@@ -32,3 +40,4 @@ class MathFuncTest(TestCase):
         self.assertEqual(15, sum(get_random_distribution_numbers(15)))
         self.assertEqual(23, sum(get_random_distribution_numbers(23)))
         self.assertEqual(55, sum(get_random_distribution_numbers(55)))
+    
