@@ -1,18 +1,22 @@
-from unittest import result
-from fastapi import FastAPI
+import re
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 import uvicorn
-
-from PasswordGenerate import Password
 
 from services import PasswordGeneratorService
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
-async def index(count: int):
+async def index(request: Request, count: int):
     result_password = await PasswordGeneratorService(count).get_value()
-    return result_password
+    return templates.TemplateResponse("index.html", {"request": request, "count": result_password})
 
 
 if __name__ == "__main__":
