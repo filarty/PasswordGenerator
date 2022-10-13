@@ -1,19 +1,17 @@
+from unittest import result
 from fastapi import FastAPI
 
 import uvicorn
 
-import asyncio
-
 from PasswordGenerate import Password
+
+from services import PasswordGeneratorService
 
 app = FastAPI()
 
-event_loop = asyncio.get_event_loop()
-
 @app.get("/")
 async def index(count: int):
-    password = Password()
-    result_password = await event_loop.run_in_executor(None, password.generate, count)
+    result_password = await PasswordGeneratorService(count).get_value()
     return result_password
 
 

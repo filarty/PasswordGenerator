@@ -13,7 +13,6 @@ def get_distribution_numbers(number: int, number_list: list[int]) -> list[int]:
 def get_random_distribution_numbers(count: int) -> list[int]:
     return (get_distribution_numbers(count, generate_random_numbers(count=4)))
 
-
 if __name__ == "__main__":
     print(get_distribution_numbers(6, generate_random_numbers(count=4)))
 
