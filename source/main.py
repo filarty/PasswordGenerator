@@ -14,9 +14,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
-async def index(request: Request, count: int):
-    result_password = await PasswordGeneratorService(count).get_value()
+async def main_get(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "count": result_password})
+
+@app.post("/")
+async def main_post():
+    ...
+
 
 
 if __name__ == "__main__":
