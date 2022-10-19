@@ -25,16 +25,16 @@ class Password:
         return "".join(string_list)
         
     def _add_upper_case(self, count: int) -> list[str]:
-        return random.sample(string.ascii_uppercase, count)
+        return [random.choice(string.ascii_uppercase) for _ in range(count)]
     
     def _add_lower_case(self, count: int) -> list[str]:
-        return random.sample(string.ascii_lowercase, count)
+        return [random.choice(string.ascii_lowercase) for _ in range(count)]
     
     def _add_number_case(self, count: int) -> list[str]:
-        return random.sample(string.digits, count)
+        return [random.choice(string.digits) for _ in range(count)]
     
     def _add_symbols_case(self, count: int) -> list[str]:
-        return random.sample(string.punctuation, count)
+        return [random.choice(string.punctuation) for _ in range(count)]
     
 if __name__ == "__main__":
     password = Password()

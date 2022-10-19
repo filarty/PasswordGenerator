@@ -1,3 +1,3 @@
 import sys
-
-sys.path.append("D:\PythonProjects\PasswordGenerator\source")
+import os
+sys.path.append(os.getcwd() + "\\source")
